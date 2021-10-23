@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import './index.css';
 import { Select, Input, Button } from 'antd';
 
-const { Option } = Select;
+const { Option } = Select; // ok
 
 let index = 0;
 
