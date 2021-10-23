@@ -1,25 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Select, Input, Button } from 'antd';
-import { CheckOutlined,  } from '@ant-design/icons';
+import { CheckOutlined } from '@ant-design/icons';
 
 const App = () => {
   const [items, setItems] = useState([
-    { name: '设备预热', deletable: false, selected: true },
+    { name: '设备预热', deletable: false, selected: false },
     { name: '等料', deletable: true, selected: false },
   ]);
+  const [selected, setSelected] = useState('');
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    const cloned = [...items];
+    const selected = cloned.filter((c) => c.selected);
+    if (selected.length > 0) {
+      setSelected(selected[0].name);
+    }
+  }, []);
+
+  const getValueProp = () => {
+    if (selected === '') return {};
+    return { value: selected };
+  };
+
   return (
     <Select
-      open={true} // 打开 dropdown
-      defaultValue={items[1].name}
+      placeholder="请选择"
+      // open={true} // 打开 dropdown
+      // defaultValue={items[1].name}
+      {...getValueProp()}
       dropdownRender={() => {
         return (
           <div>
             {items.map((item) => (
-              <div className="select-item-option select-item" key={item.name}>
+              <div
+                className="select-item-option select-item"
+                key={item.name}
+                onClick={() => {
+                  const cloned = [...items];
+                  cloned.forEach((c) => {
+                    if (c.name === item.name) {
+                      c.selected = true;
+                    } else {
+                      c.selected = false;
+                    }
+                  });
+                  setItems(cloned);
+                }}
+              >
                 <span style={{ marginRight: 1 }}>
                   <svg
                     t="1635005909243"
@@ -39,13 +70,28 @@ const App = () => {
                   </svg>
                 </span>
                 {item.name}
-                <CheckOutlined
-                  style={{ marginLeft: 'auto', color: '#3C7DFF' }}
-                />
+                {item.selected && (
+                  <CheckOutlined
+                    style={{ marginLeft: 'auto', color: '#3C7DFF' }}
+                  />
+                )}
               </div>
             ))}
             <div className="select-dropdown-input">
               <Input
+                onPressEnter={(e) => {
+                  if (e.keyCode !== 13) return;
+                  if (value === '') return;
+                  setItems([
+                    ...items,
+                    {
+                      name: value,
+                      deletable: false,
+                      selected: f,
+                    },
+                  ]);
+                  setValue('');
+                }}
                 placeholder="请输入"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
@@ -56,7 +102,37 @@ const App = () => {
             </div>
             <div className="action-button-group">
               <Button type="ghost">取消</Button>
-              <Button type="primary">创建</Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  if (value === '') return;
+                  setItems([
+                    ...items,
+                    {
+                      name: value,
+                      deletable: false,
+                      selected: true,
+                    },
+                  ]);
+                }}
+              >
+                创建
+              </Button>
+            </div>
+            <div className="action-button-group">
+              <Button type="ghost">取消</Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  const cloned = [...items];
+                  const selected = cloned.filter((c) => c.selected);
+                  if (selected.length > 0) {
+                    setSelected(selected[0].name);
+                  }
+                }}
+              >
+                确认
+              </Button>
             </div>
           </div>
         );
