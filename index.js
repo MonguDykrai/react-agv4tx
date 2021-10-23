@@ -36,7 +36,7 @@ class App extends React.Component {
         style={{ width: 240 }}
         // defaultValue={this.state.items[1]}
         dropdownRender={(menu) => {
-          console.log(menu);
+          console.log(menu); // props.options 为 [{key: '2', value: '2', children: '3'}] 即 <Option key={2}>3</Option>
           return (
             <div>
               {menu}
