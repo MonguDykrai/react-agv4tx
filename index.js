@@ -34,35 +34,39 @@ class App extends React.Component {
     return (
       <Select
         style={{ width: 240 }}
-        placeholder="custom dropdown render"
-        dropdownRender={(menu) => (
-          <div>
-            {menu}
-            <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 8 }}>
-              <Input
-                placeholder="请输入"
-                style={{
-                  flex: 'auto',
-                  background: '#23284D',
-                  borderRadius: 4,
-                  height: 40,
-                  width: 160,
-                  color: '#fff',
-                }}
-                value={name}
-                onChange={this.onNameChange}
-              />
-            </div>
+        // defaultValue={this.state.items[1]}
+        dropdownRender={(menu) => {
+          console.log(menu);
+          return (
             <div>
-              <Button type="ghost">取消</Button>
-              <Button type="primary">创建</Button>
+              {menu}
+              <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 8 }}>
+                <Input
+                  placeholder="请输入"
+                  style={{
+                    flex: 'auto',
+                    background: '#23284D',
+                    borderRadius: 4,
+                    height: 40,
+                    width: 160,
+                    color: '#fff',
+                  }}
+                  value={name}
+                  onChange={this.onNameChange}
+                />
+              </div>
+              <div>
+                <Button type="ghost">取消</Button>
+                <Button type="primary">创建</Button>
+              </div>
             </div>
-          </div>
-        )}
+          );
+        }}
       >
-        {items.map((item) => (
+        <Option key={2}>3</Option>
+        {/* {items.map((item) => (
           <Option key={item}>{item}</Option>
-        ))}
+        ))} */}
       </Select>
     );
   }
