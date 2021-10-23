@@ -11,17 +11,36 @@
 .ant-select-dropdown {
   background: #2c325c;
   color: #fff;
-  width: 180px !important;
+  min-width: 180px !important;
+  padding: 10px;
 
   box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.3);
 }
 
 .ant-select-dropdown .select-item.select-item-option {
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .ant-select-dropdown input {
+  margin-top: 12px;
   border-color: transparent;
   color: #fff;
+}
+
+.ant-select-dropdown .action-button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ant-select-dropdown .add-custom-tag {
+}
+
+.ant-select-dropdown .add-custom-tag button {
+  width: 100%;
 }
 
 .ant-select-dropdown input::placeholder {
