@@ -10,7 +10,10 @@ let index = 0;
 
 class App extends React.Component {
   state = {
-    items: ['设备预热', '等料'],
+    items: [
+      { name: '设备预热', deletable: false, selected: true },
+      { name: '等料', deletable: true, selected: false },
+    ],
     name: '',
   };
 
@@ -33,13 +36,18 @@ class App extends React.Component {
     const { items, name } = this.state;
     return (
       <Select
-        style={{ width: 240 }}
-        // defaultValue={this.state.items[1]}
+        defaultValue={this.state.items[1].name}
         dropdownRender={(menu) => {
           console.log(menu); // props.options 为 [{key: '2', value: '2', children: '3'}] 即 <Option key={2}>3</Option>
           return (
             <div>
-              {menu}
+              {/* {menu} */}
+              {items.map((item) => (
+                // deletable
+                <div className="select-item-option select-item" key={item.name}>
+                  {item.name}
+                </div>
+              ))}
               <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 8 }}>
                 <Input
                   placeholder="请输入"
@@ -49,7 +57,8 @@ class App extends React.Component {
                     borderRadius: 4,
                     height: 40,
                     width: 160,
-                    color: '#fff',
+                    // color: '#fff',
+                    // borderColor: 'transparent',
                   }}
                   value={name}
                   onChange={this.onNameChange}
@@ -63,7 +72,10 @@ class App extends React.Component {
           );
         }}
       >
-        <Option key={2}>3</Option>
+        {/* {items.map((item) => {
+          return <span>{item}</span>;
+        })} */}
+        {/* <Option key={2}>3</Option> */}
         {/* {items.map((item) => (
           <Option key={item}>{item}</Option>
         ))} */}
