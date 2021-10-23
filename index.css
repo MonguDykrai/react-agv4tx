@@ -28,6 +28,11 @@
   margin-top: 12px;
   border-color: transparent;
   color: #fff;
+  width: 160px;
+  height: 40px;
+  border-radius: 4px;
+  flex: 'auto';
+  background: #23284d;
 }
 
 .ant-select-dropdown .action-button-group {
