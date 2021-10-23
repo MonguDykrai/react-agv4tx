@@ -1,0 +1,30 @@
+.ant-select {
+  width: 100px;
+  /* background: rgba(28, 32, 63, 0.5); */
+}
+
+.ant-select > .ant-select-selector {
+  border: transparent !important;
+  background: rgba(28, 32, 63, 0.5) !important;
+}
+
+.ant-select-dropdown {
+  background: #2c325c;
+  color: #fff;
+  width: 180px !important;
+
+  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.3);
+}
+
+.ant-select-dropdown .select-item.select-item-option {
+}
+
+.ant-select-dropdown input {
+  border-color: transparent;
+  color: #fff;
+}
+
+.ant-select-dropdown input::placeholder {
+  color: #757ebb;
+  opacity: 1; /* Firefox */
+}
